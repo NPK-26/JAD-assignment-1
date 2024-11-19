@@ -13,8 +13,11 @@ try {
 
 	Connection conn = DriverManager.getConnection(connURL);
 
-	//   int service_id = request.getParameter("serviceId"); //actual one
-	int service_id = 1; //dummy service
+	String serviceIdParam = request.getParameter("serviceId"); //actual one
+	if (serviceIdParam != null) {
+		try {
+	int service_id = Integer.parseInt(serviceIdParam);
+	// 	int service_id = 1; //dummy service
 	String sqlStr = "SELECT * FROM services WHERE service_id = ?";
 	PreparedStatement pstmt1 = conn.prepareStatement(sqlStr);
 	pstmt1.setInt(1, service_id);
@@ -29,7 +32,7 @@ try {
 		ResultSet s_category = pstmt2.executeQuery();
 		String category_name = "";
 		while (s_category.next()) {
-	category_name = s_category.getString("category_name");
+			category_name = s_category.getString("category_name");
 		}
 %>
 
@@ -114,8 +117,8 @@ try {
             pstmt4.setInt(1, service_id);
             ResultSet s_items = pstmt4.executeQuery();
             ArrayList<String> service_items = new ArrayList<String>();
-            while (s_items.next()){
-              service_items.add(s_items.getString("item_name"));
+            while (s_items.next()) {
+            	service_items.add(s_items.getString("item_name"));
             }
             for (String item : service_items) {
             %>
@@ -160,8 +163,8 @@ try {
             String sqlStr = "SELECT customer_name,  FROM ";
             ResultSet reviews = stmt.executeQuery(sqlStr);
             while (reviews.next()) {
-              String customer
-              }
+            String customer
+            }
             */
             String[] customer = { "James", "Alice", "Wai", "Riley", "Arty" };
             int[] rating = { 3, 2, 4, 4, 5 };
@@ -265,14 +268,14 @@ try {
       <%
       //get other services from category
       sqlStr = "SELECT * FROM services WHERE service_category_id = ? AND service_id != ?";
-            PreparedStatement pstmt5 = conn.prepareStatement(sqlStr);
-            pstmt5.setInt(1, service.getInt("service_category_id"));
-            pstmt5.setInt(2, service_id);
-            ResultSet services = pstmt5.executeQuery();
-            HashMap<Integer,String> related_services = new HashMap<>();
-            while (services.next()){
-             related_services.put(services.getInt("service_id"),services.getString("service_name"));
-            }
+      PreparedStatement pstmt5 = conn.prepareStatement(sqlStr);
+      pstmt5.setInt(1, service.getInt("service_category_id"));
+      pstmt5.setInt(2, service_id);
+      ResultSet services = pstmt5.executeQuery();
+      HashMap<Integer, String> related_services = new HashMap<>();
+      while (services.next()) {
+      	related_services.put(services.getInt("service_id"), services.getString("service_name"));
+      }
       for (Integer i : related_services.keySet()) {
       %>
       <div class="col-md-3">
@@ -281,7 +284,8 @@ try {
             alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=related_services.get(i)%></h5>
-            <a href="service_page.jsp?serviceId=${i}" class="btn btn-primary">See More</a>
+            <a href="service_page.jsp?serviceId=<%=i%>"
+              class="btn btn-primary">See More</a>
           </div>
         </div>
       </div>
@@ -292,6 +296,10 @@ try {
   </div>
   <%
   conn.close();
+  }
+  } catch (Exception e) {
+  out.println("Error" + e);
+  }
   }
   } catch (Exception e) {
   out.println("Error" + e);
