@@ -4,10 +4,16 @@
         		
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         		
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         		
         <property name="context-root" value="Assignment-1"/>
         <property name="java-output-path" value="/Assignment-1/bin"/>
+=======
+        <property name="context-root" value="Assignment-1"/>
+        		
+        <property name="java-output-path" value="/Assignment-1/build/classes"/>
+>>>>>>> branch 'main' of https://github.com/NPK-26/JAD-assignment-1.git
         	
     </wb-module>
     
