@@ -11,7 +11,7 @@
 	rel="stylesheet">
 </head>
 <body>
-	<%@ include file="header.html"%>
+	<%@ include file="header.jsp"%>
 	<!--  Introduction Section -->
 	<div class="container-fluid py-5" style="background-color: #b3d7f1;">
 		<div class="row justify-content-center py-5 px-5 mx-5">
