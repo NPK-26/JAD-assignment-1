@@ -29,7 +29,7 @@
         if (memId == null) {
         	// Session does not have memId
         %>
-        <li class="nav-item"><a class="nav-link" href="login.jsp">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="loginPage.jsp">Login</a></li>
         <li class="nav-item"><a class="nav-link"
           href="registrationPage.jsp">Sign Up</a></li>
         <%
